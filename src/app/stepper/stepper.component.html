@@ -1,0 +1,86 @@
+<mat-horizontal-stepper #stepper [formGroup]="formgroup">
+    
+  <mat-step [stepControl]="firstFormGroup">
+     
+    <form formGroupName="firstFormGroup">
+        <ng-template matStepLabel>First Step</ng-template>
+        <mat-form-field>
+          <input type="text" matInput placeholder="First Name" formControlName="firstName">
+          
+          <mat-error *ngIf="formgroup.get('firstFormGroup.firstName').errors?.required">First name is required</mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <input type="text" matInput placeholder="Last Name" formControlName="lastName">
+          <mat-error *ngIf="formgroup.get('firstFormGroup.lastName').errors?.required">Last Name is required</mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <input type="email" matInput placeholder="Email Address" formControlName="emailAddress">
+          <mat-error *ngIf="formgroup.get('firstFormGroup.emailAddress').errors?.required">Email is required</mat-error>
+          <mat-error *ngIf="formgroup.get('firstFormGroup.emailAddress').errors?.email">Invalid Email</mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <input type="text" matInput placeholder="Phone Number" formControlName="phoneNumber">
+          <mat-error *ngIf="formgroup.get('firstFormGroup.phoneNumber').errors?.required">Phone number is required</mat-error>
+          
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <input type="text" matInput placeholder="Business Name" formControlName="businessName">
+          <mat-error *ngIf="formgroup.get('firstFormGroup.businessName').errors?.required">Business name is required</mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <input type="text" matInput placeholder="Business Type" formControlName="businessType">
+          <mat-error *ngIf="formgroup.get('firstFormGroup.businessType').errors?.required">Business Type is required</mat-error>
+        </mat-form-field>
+        <mat-form-field style="margin-left: 10px;">
+          <input type="text" matInput placeholder="Size" formControlName="size">
+          <mat-error *ngIf="formgroup.get('firstFormGroup.size').errors?.required">size is required</mat-error>
+        </mat-form-field>
+        <br>
+        <button mat-raised-button color="primary" [disabled]="formgroup.get('firstFormGroup').invalid" matStepperNext>Continue</button>
+    </form>
+ 
+  </mat-step>
+  <mat-step [stepControl]="addressGroup">
+    <form formGroupName="addressGroup">
+      <ng-template>Second step</ng-template>
+        <mat-form-field>
+            <input type="text" matInput placeholder="Street Address" formControlName="streetAddress">
+            <mat-error *ngIf="formgroup.get('addressGroup.streetAddress').errors?.required">Street Address is required</mat-error>
+          </mat-form-field>
+          <br>
+        <mat-form-field>
+            <input type="text" matInput placeholder="Street Address2(optional)" formControlName="streetAddress2">
+        </mat-form-field>  
+        <br>
+        <mat-form-field>
+            <input type="text" matInput placeholder="City" formControlName="city">
+            <mat-error *ngIf="formgroup.get('addressGroup.city').errors?.required">city is required</mat-error>
+        </mat-form-field> 
+        <br>
+        <mat-form-field>
+            <input type="text" matInput placeholder="State" formControlName="state">
+            <mat-error *ngIf="formgroup.get('addressGroup.state').errors?.required">state is required</mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+              <input type="text" matInput placeholder="Zipcode" formControlName="zipcode">
+              <mat-error *ngIf="formgroup.get('addressGroup.zipcode').errors?.required">Zipcode is required</mat-error>
+        </mat-form-field> 
+        <br>
+        <button mat-raised-button [disabled]="formgroup.get('addressGroup').invalid" color="primary" matStepperPrevious>Back</button>
+    </form>
+  </mat-step>
+  <mat-step>
+      <ng-template>Done</ng-template>
+      You are now done.
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+    </mat-step>
+</mat-horizontal-stepper>
